@@ -18,13 +18,13 @@ const crearTema = (titulo) => {
 
 // actualizar un tema
 const actualizarTema = (id, titulo) => {
-    const tema = temas.find(t => t.id === parseInt(id))
+    const tema = temas.find(t => t.id === parseInt(id)) // busca el primer elemento que cumpla una condicion
     if (tema) tema.titulo = titulo
     return tema
 }
 
 // eliminar un tema
 const eliminarTema = (id) => {
-    temas = temas.filter(t => t.id !== parseInt(id))
+    temas = temas.filter(t => t.id !== parseInt(id)) // devuelve un nuevo array sin los elemntos que no cumplan una condicion
 }
 module.exports = { obtenerTemas, crearTema, actualizarTema, eliminarTema }
