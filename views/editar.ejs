@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Editar tema</title>
+</head>
+<body>
+
+  <h1>Editar tema</h1>
+
+  <form action="/temas/<%= tema.id %>/editar" method="POST">
+    <label for="titulo">Título del tema:</label>
+    <input type="text" id="titulo" name="titulo" value="<%= tema.titulo %>">
+    <button type="submit">Guardar cambios</button>
+  </form>
+
+  <a href="/temas">← Volver a la lista</a>
+
+</body>
+</html>

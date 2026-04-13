@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Agregar tema</title>
+</head>
+<body>
+
+  <h1>Agregar nuevo tema</h1>
+
+  <form action="/temas/crear" method="POST">
+    <label for="titulo">Título del tema:</label>
+    <input type="text" id="titulo" name="titulo" placeholder="Ej: Cómo ser un ninja del café">
+    <button type="submit">Guardar</button>
+  </form>
+
+  <a href="/temas">← Volver a la lista</a>
+
+</body>
+</html>
