@@ -11,7 +11,7 @@ const obtenerTemas = () => temas
 
 // crear un tema nuevo 
 const crearTema = (titulo) => {
-    const nuevoTema = { id: nextId++, titiulo, votos: 0 }
+    const nuevoTema = { id: nextId++, titulo, votos: 0 }
     temas.push(nuevoTema)
     return nuevoTema
 }
