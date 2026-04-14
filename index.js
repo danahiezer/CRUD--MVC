@@ -2,8 +2,14 @@
 // Responsabilidad: arrancar el servidor y conectar las rutas
 
 const express = require('express')
+const mongoose = require('mongoose')
 const app = express()
 const PORT = 3000
+
+// Conectar a MongoDB
+mongoose.connect('mongodb://localhost:27017/learn_it_love_it')
+  .then(() => console.log('Conectado a MongoDB'))
+  .catch(err => console.log('Error conectando a MongoDB:', err))
 
 // Motor de plantillas
 app.set('view engine', 'ejs')
