@@ -1,9 +1,9 @@
 // controllers/temacontrollers.js
-const { obtenerTemas, crearTema, actualizarTema, eliminarTema } = require('../models/temaModel')
+const Tema = require('../models/temaModel')
 
 // listar todos los temas
-const listarTemas = (req, res) => {
-    const temas = obtenerTemas()
+const listarTemas = async (req, res) => {
+    const temas = await Tema.find().sort({ votos: -1})
     res.render('temas', {temas}) // render = prepara y muestra los datos al usuario
 }
 
@@ -13,29 +13,28 @@ const mostrarFormulario = (req, res) => {
 }
 
 // crear un tema nuevo
-const crearTemacontroller = (req, res) => {
+const crearTemacontroller = async (req, res) => {
     const { titulo } = req.body // guarda datos que vienen de un formulario html
-    crearTema(titulo)
+    await Tema.create({ titulo })
     res.redirect('/temas') // manda al navegador a otra url
 }
 
 // mostrar formulario para editar tema
-const mostrarEditorForm = (req, res) => {
-    const temas = obtenerTemas()
-    const tema = temas.find(t => t.id === parseInt(req.params.id)) // captura el valor de la url (/temas/3/editar) entonces (req.param.id) = 3
+const mostrarEditorForm = async (req, res) => {
+    const tema = await Tema.findById(req.params.id)
     res.render('editar', {tema}) // render = prepara y muestra los datos al usuario
 }
 
 // actualizar un tema
-const actualizarTemacontroller = (req, res) => {
+const actualizarTemacontroller = async (req, res) => {
     const { titulo } = req.body // guarda datos que vienen de un formulario html
-    actualizarTema(req.params.id, titulo)
+    await Tema.findByIdAndUpdate(req.params.id, { titulo })
     res.redirect('/temas') // manda al navegador a otra url
 }
 
 // eliminar un tema
-const eliminarTemaController = (req, res) => {
-    eliminarTema(req.params.id)
+const eliminarTemaController = async (req, res) => {
+    await Tema.findByIdAndDelete(req.params.id)
     res.redirect('/temas') // manda al navegador a otra url
 }
 
