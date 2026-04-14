@@ -3,7 +3,7 @@ const Tema = require('../models/temaModel')
 
 // listar todos los temas
 const listarTemas = async (req, res) => {
-    const temas = await Tema.find().sort({ votos: -1})
+    const temas = await Tema.find().sort({ votos: -1}) // ordena los temas de mayor a menor
     res.render('temas', {temas}) // render = prepara y muestra los datos al usuario
 }
 
@@ -21,20 +21,20 @@ const crearTemacontroller = async (req, res) => {
 
 // mostrar formulario para editar tema
 const mostrarEditorForm = async (req, res) => {
-    const tema = await Tema.findById(req.params.id)
+    const tema = await Tema.findById(req.params.id) // encuentra el tema por su id 
     res.render('editar', {tema}) // render = prepara y muestra los datos al usuario
 }
 
 // actualizar un tema
 const actualizarTemacontroller = async (req, res) => {
     const { titulo } = req.body // guarda datos que vienen de un formulario html
-    await Tema.findByIdAndUpdate(req.params.id, { titulo })
+    await Tema.findByIdAndUpdate(req.params.id, { titulo }) // actualiza los datos del tema 
     res.redirect('/temas') // manda al navegador a otra url
 }
 
 // eliminar un tema
 const eliminarTemaController = async (req, res) => {
-    await Tema.findByIdAndDelete(req.params.id)
+    await Tema.findByIdAndDelete(req.params.id) // elimina el tema 
     res.redirect('/temas') // manda al navegador a otra url
 }
 
