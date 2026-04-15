@@ -6,7 +6,7 @@
 </head>
 <body>
 
-  <h1>🎓 Learn It, Love It!</h1>
+  <h1> Learn It, Love It!</h1>
 
   <p>total de temas: <%= temas.length %></p>
 
@@ -14,9 +14,13 @@
 
   <ul>
     <% temas.forEach(tema => { %>
-      <li>
-        #<%= tema.id %> - <strong><%= tema.titulo %></strong>
-        — <%= tema.votos %> votos
+      <li id="tema-<%= tema._id %>">
+        <strong><%= tema.titulo %></strong>
+        — <span class="contador-votos"><%= tema.votos %></span> votos
+
+        <button class="btn-votar" data-id="<%= tema._id %>"> Votar</button>
+
+        <a href="/temas/<%= tema._id %>/editar">Editar</a>
 
         <a href="/temas/<%= tema.id %>/editar">Editar</a>
 
@@ -26,6 +30,7 @@
       </li>
     <% }) %>
   </ul>
+  <script src="/js/votar.js"></script>
 
 </body>
 </html>  
