@@ -38,11 +38,22 @@ const eliminarTemaController = async (req, res) => {
     res.redirect('/temas') // manda al navegador a otra url
 }
 
+const votarTema = async (req, res) => {
+    const tema = await Tema.findByIdAndUpdate( // actualiza datos de votos
+        req.params.id,
+        { $inc: { votos: 1 } }, // operador de MongodDB para incrementar un valor
+        {new: true} // actualiza y luego dice a mongoose que devuelva documentos actualizados
+    )
+    res.json({ votos: tema.votos }) // devuelve json para que js de navegador lea y actualice contador en pantalla
+    
+}
+
 module.exports = {
     listarTemas,
     crearTemacontroller,
     mostrarFormulario,
     mostrarEditorForm,
     actualizarTemacontroller,
-    eliminarTemaController
+    eliminarTemaController,
+    votarTema
  }
