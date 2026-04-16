@@ -42,7 +42,7 @@ const votarTema = async (req, res) => {
     const tema = await Tema.findByIdAndUpdate( // actualiza datos de votos
         req.params.id,
         { $inc: { votos: 1 } }, // operador de MongodDB para incrementar un valor
-        {new: true} // actualiza y luego dice a mongoose que devuelva documentos actualizados
+        {returnDocument: 'after'} // actualiza y luego dice a mongoose que devuelva documentos actualizados
     )
     res.json({ votos: tema.votos }) // devuelve json para que js de navegador lea y actualice contador en pantalla
     
