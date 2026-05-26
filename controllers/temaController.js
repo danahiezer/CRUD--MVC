@@ -3,7 +3,7 @@ const Tema = require('../models/temaModel')
 
 // listar todos los temas
 const listarTemas = async (req, res) => {
-    const temas = await Tema.find().sort({ votos: -1}) // ordena los temas de mayor a menor
+    const temas = await Tema.find().sort({ votos: -1 }).lean()// ordena los temas de mayor a menor
     res.render('temas', {temas}) // render = prepara y muestra los datos al usuario
 }
 
@@ -21,8 +21,8 @@ const crearTemacontroller = async (req, res) => {
 
 // mostrar formulario para editar tema
 const mostrarEditorForm = async (req, res) => {
-    const tema = await Tema.findById(req.params.id) // encuentra el tema por su id 
-    res.render('editar', {tema}) // render = prepara y muestra los datos al usuario
+    const tema = await Tema.findById(req.params.id).lean() // encuentra el tema por su id 
+    res.render('editar', {tema}) // render (cargar) = muestra los datos 
 }
 
 // actualizar un tema
@@ -46,7 +46,7 @@ const votarTema = async (req, res) => {
     )
     res.json({ votos: tema.votos }) // devuelve json para que js de navegador lea y actualice contador en pantalla
     
-}
+} // investigar esta funcion 
 
 module.exports = {
     listarTemas,
