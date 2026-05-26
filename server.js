@@ -13,7 +13,7 @@ mongoose.connect('mongodb://host.docker.internal:27017/learn_it_love_it')
   .catch(err => console.log('Error conectando a MongoDB:', err))
 
 // Motor de plantillas
-app.engine("handlebars",engine())
+app.engine("handlebars", engine())
 app.set('view engine', 'handlebars')
 app.set("views", "./views")
 
