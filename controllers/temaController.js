@@ -46,7 +46,36 @@ const votarTema = async (req, res) => {
     )
     res.json({ votos: tema.votos }) // devuelve json para que js de navegador lea y actualice contador en pantalla
     
-} // investigar esta funcion 
+} // investigar esta funcion
+
+// muestra formulario para agregar enlace
+const formrenlace = (req, res) => {
+    res.render("enlaces",{id: req.params.id})
+}
+// agrega enlace al tema
+const agregarenlace = async (req, res) => {
+    const { url } = req.body 
+    await Tema.findByIdAndUpdate(req.params.id,{ $push: { enlaces:{ url }
+}})
+    res.redirect("/temas")
+}
+
+const votarEnlace = async (req, res) => {
+    const tema = await Tema.findOneAndUpdate(
+        { 
+            _id: req.params.id,           // busca el tema por id
+            'enlaces._id': req.params.enlaceId  // busca el enlace dentro del tema
+        },
+        { 
+            $inc: { 'enlaces.$.votos': 1 }  // incrementa los votos de ese enlace
+        },
+        { returnDocument: 'after' }
+    ).lean()
+
+    // busca el enlace actualizado para devolver sus votos
+    const enlace = tema.enlaces.find(e => e._id.toString() === req.params.enlaceId)
+    res.json({ votos: enlace.votos })
+}
 
 module.exports = {
     listarTemas,
@@ -55,5 +84,8 @@ module.exports = {
     mostrarEditorForm,
     actualizarTemacontroller,
     eliminarTemaController,
-    votarTema
+    votarTema,
+    formrenlace,
+    agregarenlace,
+    votarEnlace
  }
