@@ -4,7 +4,13 @@ const mongoose = require('mongoose')
 // Definir la estructura del documento
 const temaSchema = new mongoose.Schema({
   titulo: { type: String, required: true },
-  votos: { type: Number, default: 0 }
+  votos: { type: Number, default: 0 },
+  enlaces: [
+  {
+      url: { type: String, required: true },
+    votos: {type: Number, default: 0}
+  }
+  ]
 })
 
 // Crear el modelo
