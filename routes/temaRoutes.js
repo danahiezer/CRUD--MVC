@@ -8,7 +8,10 @@ const {
     crearTemacontroller,
     actualizarTemacontroller,
     eliminarTemaController,
-    votarTema
+    votarTema,
+    formrenlace,
+    agregarenlace,
+    votarEnlace
 } = require('../controllers/temaController')
 
 router.get('/', listarTemas) // ver lista
@@ -18,4 +21,8 @@ router.get('/:id/editar', mostrarEditorForm)// ver form editar
 router.post('/:id/editar', actualizarTemacontroller)// enviar form editar
 router.post('/:id/eliminar', eliminarTemaController)// eliminar tema
 router.post('/:id/votar', votarTema) // votos de temas
+router.get('/:id/enlaces', formrenlace)
+router.post('/:id/enlaces', agregarenlace)
+router.post('/:id/enlaces/:enlaceId/votar', votarEnlace)
+
 module.exports = router
